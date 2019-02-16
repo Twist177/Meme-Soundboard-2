@@ -4,6 +4,7 @@
 CREATE TABLE soundFiles (
 	fileName VARCHAR(32),
 	filePath VARCHAR(64),
+	imageFilePath VARCHAR(64),
 	userMade VARCHAR(16),
 	PRIMARY KEY(filePath));
 
