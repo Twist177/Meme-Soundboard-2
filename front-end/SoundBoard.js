@@ -8,6 +8,7 @@ class SoundBoard {
         this.board = document.querySelector("#sound_board")
 
         constructBoard(userName)
+        renderitem()
     }
 
     // Initializes the board with sound buttons for each row and column
