@@ -44,7 +44,7 @@ body {
 
   list-style: none;
 
-  background: green;
+  background: #92D4F7;
   display: flex;
   justify-content: space-evenly;
 }
@@ -60,10 +60,11 @@ body {
 }
 
 .toolbar a:hover {
-  background-color: #0F0;
+  background-color: #FFB1EA;
 }
 
 footer {
+  background: #92D4F7;  
 	height: 125px;
 	width: 100%;
 	background-color: green;
