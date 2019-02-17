@@ -10,6 +10,16 @@ app.get('/', function (req, res) {
 	res.end();
 })
 
+app.get('/get-sounds', function (req, res) {
+	//res.write(fs.readFileSync(__dirname + '/../header.html', 'utf8'));
+	//res.write(fs.readFileSync(__dirname + '/../home.html', 'utf8'));
+    /*query database for sounds
+    put sounds in list
+    return list
+     */
+    res.end();
+})
+
 var server = app.listen(process.env.PORT || 80, function () {
    var host = server.address().address
    var port = server.address().port
