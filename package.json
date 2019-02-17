@@ -1,0 +1,21 @@
+{
+  "name": "meme-soundboard",
+  "description": "A",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "author": "team meme",
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": "https://github.com/Twist177/Meme-Soundboard-2",
+  "main": "back-end/index.js",
+  "private": true,
+  "scripts": {
+    "start": "node back-end/index.js"
+  },
+  "dependencies": {
+    "express": "4.16.4",
+    "mysql": "2.16.0"
+  },
+  "devDependencies": {}
+}
