@@ -17,11 +17,11 @@ CREATE TABLE users (
 
 --playlists, collections of soundFiles made by users
 CREATE TABLE playlists (
-	filePath VARCHAR(64),
+	fileName VARCHAR(32),
 	userName VARCHAR(16),
 	playName VARCHAR(32),
-	PRIMARY KEY(filePath, userName),
-	FOREIGN KEY (filePath) REFERENCES soundFiles(filePath),
+	PRIMARY KEY(fileName, userName),
+	FOREIGN KEY (fileName) REFERENCES soundFiles(fileName),
 	FOREIGN KEY (userName) REFERENCES users(userName));
 
 --list of rooms currently made, with users in that room
