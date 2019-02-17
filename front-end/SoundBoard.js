@@ -1,10 +1,13 @@
 // Represents the sound board the user will interact with
 class SoundBoard {
-    constructor(name, fileName, rows, columns){
+    constructor(userName, name, fileName, rows, columns){
         this.buttons = []
         this.name = name
         this.rows = rows
         this.cols = columns
+        this.board = document.querySelector("#sound_board")
+
+        constructBoard(userName)
     }
 
     // Initializes the board with sound buttons for each row and column
@@ -29,5 +32,22 @@ class SoundBoard {
       });
     }
 
-    
+    // Plays the sound associated with audio
+    playSound(audio, ev) {
+      audio.play()
+    }
+
+    // Renders the sound board and each button within it onto the page
+    // Each button's background is its corresponding image and
+    // its onClick event is handled by playSound with the appropriate audio.
+    renderItem() {
+        this.buttons.forEach(function(button) {
+            soundButton = document.createElement("button")
+            soundButton.setAttribute("class", "tile")
+            this.board.appendChild(soundButton)
+            soundButton.style.backgroundImage = `url(${button.imageFilePath})`
+            soundButton.addEventListener('click',
+            (ev) => this.playSound(button.audio, ev))
+        })
+    }
 }

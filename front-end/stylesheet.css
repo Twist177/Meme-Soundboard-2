@@ -4,17 +4,16 @@ body {
 	font-family: "Rubik", Arial, serif;
 }
 
-#tile {
+.tile {
   border-radius: 25px;
   background-color: green;
   padding: 20px;
-  width: 200px;
-  height: 150px;
+  width: 30px;
+  flex-basis: 33%;
   cursor: pointer;
   &.playing {
     border: 5px blue;
   }
-
 }
 
 #sound_board_link {
@@ -27,7 +26,9 @@ body {
 }
 
 #sound_board {
-	height: 100vh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 #sound_board_title{
