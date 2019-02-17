@@ -4,11 +4,16 @@ const fs = require('fs');
 const mysql = require('mysql');
 var app = express();
 
+app.get('/stylesheet.css', function(req, res) {
+	res.write(fs.readFileSync(__dirname + '/../front-end/stylesheet.css', 'utf8'));
+	res.end();
+});
+
 app.get('/', function (req, res) {
 	//res.write(path.join(__dirname + '/../header.html'));
 	//res.write(path.join(__dirname + '/../home.html'));
 
-	var con = mysql.createConnection({
+	/*var con = mysql.createConnection({
 	  host     : '35.232.110.39',
 	  user     : 'root',
 	  password : 'meme',
@@ -25,10 +30,11 @@ app.get('/', function (req, res) {
   		if (error) throw error;
   		console.log('The solution is: ', results[0].userName);
 	});
-	con.end();
+	con.end();*/
 
-	res.write(fs.readFileSync(__dirname + '/../header.html', 'utf8'));
-	res.write(fs.readFileSync(__dirname + '/../home.html', 'utf8'));
+	res.write(fs.readFileSync(__dirname + '/../front-end/tool_bar.html', 'utf8'));
+	res.write(fs.readFileSync(__dirname + '/../front-end/soundtesterbody.html', 'utf8'));
+	res.write(fs.readFileSync(__dirname + '/../front-end/footer.html', 'utf8'));
 	res.end();
 })
 
