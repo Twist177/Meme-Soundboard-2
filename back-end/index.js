@@ -93,7 +93,8 @@ app.post('/submit-sound', upload.single('sound'), function(req, res) {
 		var name = req.body.name;
 		var con = database.getConnection();
 		con.query("insert into soundFiles values(\'"+con.escape(name)+"\', "+con.escape(req.file.path)+", null, null)", function(error, results, fields) {
-			console.log(results);
+			console.log("error: "+error);
+			console.log("result: "+results);
 		});
 		con.end();
 	}
