@@ -5,8 +5,9 @@ CREATE TABLE soundFiles (
 	fileName VARCHAR(32),
 	filePath VARCHAR(64),
 	imageFilePath VARCHAR(64),
-	userMade VARCHAR(16),
-	PRIMARY KEY(filePath));
+	userName VARCHAR(16),
+	PRIMARY KEY(filePath),
+	FOREIGN KEY (userName) REFERENCES users(userName));
 
 --account information
 CREATE TABLE users (
@@ -16,11 +17,11 @@ CREATE TABLE users (
 
 --playlists, collections of soundFiles made by users
 CREATE TABLE playlists (
-	filePath VARCHAR(64),
+	fileName VARCHAR(32),
 	userName VARCHAR(16),
 	playName VARCHAR(32),
-	PRIMARY KEY(filePath, userName),
-	FOREIGN KEY (filePath) REFERENCES soundFiles(filePath),
+	PRIMARY KEY(fileName, userName),
+	FOREIGN KEY (fileName) REFERENCES soundFiles(fileName),
 	FOREIGN KEY (userName) REFERENCES users(userName));
 
 --list of rooms currently made, with users in that room
