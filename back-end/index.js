@@ -39,11 +39,12 @@ var upload = multer({
 
 var count = 0;
 
-function writeSound(url) {
+function writeSound(url, name) {
 	//result = "<script>var "+counter+"= new Audio(\"../"+url+"\");</script>";
 	result = "<script>a["+count+"]= new Howl({src: [\'"+url+"\']});</script>";
 	//result += "<div class=\"tile\" onclick=\"a["+count+"].play();socket.send(\'"+count+"\');\">";
-	result += "<div class=\"tile\" onclick=\"socket.send(\'"+count+"\');\">";
+	result += "<div class=\"tile\" onclick=\"socket.send(\'"+count+"\');a["+count+"].play();\">";
+	result += "<span>"+name+"</span>";
 	result += "</div>";
 	count += 1;
 
@@ -68,9 +69,9 @@ app.get('/', function (req, res) {
 	count = 0;
 	var tileCode = "<script>var a=[];</script>";
 	var con = database.getConnection();
-	con.query("select sF.filePath from soundFiles sF", function(error, results, fields) {
+	con.query("select sF.filePath,sF.fileName from soundFiles sF", function(error, results, fields) {
 		for (let i = 0; i < results.length; i++) {
-			tileCode += writeSound(results[i].filePath);
+			tileCode += writeSound(results[i].filePath, results[i].fileName);
 		}
 
 		buffer = buffer.replace('*here*', tileCode);
@@ -89,8 +90,9 @@ app.get('/create', function(req, res) {
 
 app.post('/submit-sound', upload.single('sound'), function(req, res) {
 	if (req.file != undefined) {
+		var name = req.body.name;
 		var con = database.getConnection();
-		con.query("insert into soundFiles values(null, "+con.escape(req.file.path)+", null, null)", function(error, results, fields) {
+		con.query("insert into soundFiles values(\'"+con.escape(name)+"\', "+con.escape(req.file.path)+", null, null)", function(error, results, fields) {
 			console.log(results);
 		});
 		con.end();
@@ -101,15 +103,6 @@ app.post('/submit-sound', upload.single('sound'), function(req, res) {
 //opening our express app through the http server
 var server = http.createServer(app);
 server.listen(port);
-
-/*var server = app.listen(process.env.PORT || 80, function () {
-   var host = server.address().address
-   var port = server.address().port
-
-   console.log("Example app listening at http://%s:%s", host, port)
-})*/
-
-
 
 //ws server
 const wss = new websocketServer({server: server});
