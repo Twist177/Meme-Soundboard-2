@@ -3,7 +3,9 @@ const path = require('path');
 const fs = require('fs');
 const mysql = require('mysql');
 const multer = require('multer');
+const ws = require('ws');
 const database = require('./database');
+
 var app = express();
 
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
@@ -32,13 +34,15 @@ var upload = multer({
   fileFilter: filter
 });
 
-var counter = "a";
+var count = 0;
 
 function writeSound(url) {
-	result = "<script>var "+counter+"= new Audio(\"../"+url+"\");</script>";
-	result += "<div class=\"tile\" onclick=\""+counter+".play()\">";
+	//result = "<script>var "+counter+"= new Audio(\"../"+url+"\");</script>";
+	result = "<script>a["+count+"]= new Howl({src: [\'"+url+"\']});</script>";
+	//result += "<div class=\"tile\" onclick=\"a["+count+"].play();socket.send(\'"+count+"\');\">";
+	result += "<div class=\"tile\" onclick=\"socket.send(\'"+count+"\');\">";
 	result += "</div>";
-	counter += "a";
+	count += 1;
 
 	return result;
 }
@@ -58,11 +62,10 @@ app.get('/', function (req, res) {
 	buffer = (fs.readFileSync(__dirname + '/../front-end/soundtesterbody.html', 'utf8'));
 	buffer += (fs.readFileSync(__dirname + '/../front-end/footer.html', 'utf8'));
 	//query database to get sounds
-	counter = "a";
-	var tileCode = "";
+	count = 0;
+	var tileCode = "<script>var a=[];</script>";
 	var con = database.getConnection();
 	con.query("select sF.filePath from soundFiles sF", function(error, results, fields) {
-		console.log(results);
 		for (let i = 0; i < results.length; i++) {
 			tileCode += writeSound(results[i].filePath);
 		}
@@ -98,3 +101,16 @@ var server = app.listen(process.env.PORT || 80, function () {
 
    console.log("Example app listening at http://%s:%s", host, port)
 })
+
+//ws server
+const wss = new ws.Server({port: 8080});
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(data) {
+    // Broadcast to everyone else.
+    wss.clients.forEach(function each(client) {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(data);
+      }
+    });
+  });
+});

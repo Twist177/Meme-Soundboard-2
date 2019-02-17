@@ -1,4 +1,13 @@
     <div id = "sound_board_title"></div>
 
+	<script src="/howler.min.js"></script>
+	<script>
+		socket = new WebSocket("wss://meme-soundboard.herokuapp.com:8080");
+		socket.onmessage = function (event) {
+			console.log(event.data);
+			a[parseInt(event.data)].play();
+		}
+	</script>
+
     <div id = "sound_board">*here*</div>
     </body>
