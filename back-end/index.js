@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const mysql = require('mysql');
 const multer = require('multer');
+const WebSocket = require('ws');
 const websocketServer = require('ws').Server;
 const database = require('./database');
 
