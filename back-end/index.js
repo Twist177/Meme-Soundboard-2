@@ -1,33 +1,3 @@
-<<<<<<< HEAD
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const mysql = require('mysql');
-var app = express();
-
-app.get('/', function (req, res) {
-	res.write(fs.readFileSync(__dirname + '/../header.html', 'utf8'));
-	res.write(fs.readFileSync(__dirname + '/../home.html', 'utf8'));
-	res.end();
-})
-
-app.get('/get-sounds', function (req, res) {
-	//res.write(fs.readFileSync(__dirname + '/../header.html', 'utf8'));
-	//res.write(fs.readFileSync(__dirname + '/../home.html', 'utf8'));
-    /*query database for sounds
-    put sounds in list
-    return list
-     */
-    res.end();
-})
-
-var server = app.listen(process.env.PORT || 80, function () {
-   var host = server.address().address
-   var port = server.address().port
-
-   console.log("Example app listening at http://%s:%s", host, port)
-})
-=======
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -68,4 +38,3 @@ var server = app.listen(process.env.PORT || 80, function () {
 
    console.log("Example app listening at http://%s:%s", host, port)
 })
->>>>>>> 9b4819424796f5a7947be5dd994b8325a25a2dce
