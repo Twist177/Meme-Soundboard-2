@@ -2,19 +2,15 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: "Rubik", Arial, serif;
-  background-image: url(pattern.svg); 
+  background-image: url(pattern.svg);
 }
 
 .tile {
-  border-radius: 25px;
-  background-color: green;
-  padding: 20px;
-  width: 30px;
-  flex-basis: 33%;
-  cursor: pointer;
-  &.playing {
-    border: 5px blue;
-  }
+  width: 200px;
+  height: 100px;
+  background-color: #39E;
+  border-radius: 2px;
+  margin: 10px 20px;
 }
 
 #sound_board_link {
