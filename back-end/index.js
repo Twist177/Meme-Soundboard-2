@@ -5,22 +5,6 @@ const mysql = require('mysql');
 var app = express();
 
 app.get('/', function (req, res) {
-	//res.write(path.join(__dirname + '/../header.html'));
-	//res.write(path.join(__dirname + '/../home.html'));
-
-	var con = mysql.createConnection({
-	  host     : '35.226.74.253',
-	  user     : 'root',
-	  password : 'meme',
-	  database : 'postgres'
-	});
-	con.connect()
-	con.query('SELECT userExists(\'Hoosier1\', \'123\')', function (error, results, fields) {
-  		if (error) throw error;
-  		console.log('The solution is: ', results[0].solution);
-	});
-	con.end();
-
 	res.write(fs.readFileSync(__dirname + '/../header.html', 'utf8'));
 	res.write(fs.readFileSync(__dirname + '/../home.html', 'utf8'));
 	res.end();
