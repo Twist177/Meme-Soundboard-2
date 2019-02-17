@@ -17,7 +17,6 @@ CREATE TABLE users (
 --playlists, collections of soundFiles made by users
 CREATE TABLE playlists (
 	filePath VARCHAR(64),
-	imagePath VARCHAR(64),
 	userName VARCHAR(16),
 	playName VARCHAR(32),
 	PRIMARY KEY(filePath, userName),
