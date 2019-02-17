@@ -1,4 +1,4 @@
-.tile {
+#tile {
   border-radius: 25px;
   background-color: green;
   padding: 20px;
@@ -11,16 +11,24 @@
 
 }
 
+#sound_board_link {
+  border-radius: 25px;
+  background-color: blue;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+  cursor: pointer;
+}
 
 
-sound_board_title{
+#sound_board_title{
   color: red;
   font-family: "Times New Roman", Times, serif;
   text-align: center;
 }
 
 
-meme_title {
+#meme_title {
   z-index: 1;
 
 }
