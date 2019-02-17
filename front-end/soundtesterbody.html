@@ -2,7 +2,7 @@
 
 	<script src="/howler.min.js"></script>
 	<script>
-		socket = new WebSocket("ws://meme-soundboard.herokuapp.com:8080");
+		socket = new WebSocket("wss://meme-soundboard.herokuapp.com");
 		socket.onmessage = function (event) {
 			console.log(event.data);
 			a[parseInt(event.data)].play();

@@ -1,12 +1,14 @@
+const http = require("http")
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const mysql = require('mysql');
 const multer = require('multer');
-const ws = require('ws');
+const websocketServer = require('ws').Server;
 const database = require('./database');
 
 var app = express();
+var port = process.env.PORT || 80;
 
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
 
@@ -95,15 +97,21 @@ app.post('/submit-sound', upload.single('sound'), function(req, res) {
     res.redirect('/');
 });
 
-var server = app.listen(process.env.PORT || 80, function () {
+//opening our express app through the http server
+var server = http.createServer(app);
+server.listen(port);
+
+/*var server = app.listen(process.env.PORT || 80, function () {
    var host = server.address().address
    var port = server.address().port
 
    console.log("Example app listening at http://%s:%s", host, port)
-})
+})*/
+
+
 
 //ws server
-const wss = new ws.Server({port: 8080});
+const wss = new websocketServer({server: server});
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(data) {
     // Broadcast to everyone else.
@@ -114,3 +122,5 @@ wss.on('connection', function connection(ws) {
     });
   });
 });
+
+console.log("live on port "+port);
