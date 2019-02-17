@@ -23,9 +23,8 @@ body {
 }
 
 #sound_board {
-    height: 100vh;
     display: flex;
-    justify-content: center;
+	flex-wrap: wrap;
 }
 
 #sound_board_title{

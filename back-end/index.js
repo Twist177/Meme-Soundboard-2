@@ -73,6 +73,7 @@ app.get('/', function (req, res) {
 		for (let i = 0; i < results.length; i++) {
 			tileCode += writeSound(results[i].filePath, results[i].fileName);
 		}
+		tileCode += "<button>play sounds</button>";
 
 		buffer = buffer.replace('*here*', tileCode);
 		res.write(buffer);
