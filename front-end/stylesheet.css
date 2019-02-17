@@ -1,0 +1,57 @@
+.tile {
+  border-radius: 25px;
+  background-color: green;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+  cursor: pointer;
+  &.playing {
+    border: 5px blue;
+  }
+
+}
+
+
+
+sound_board_title{
+  color: red;
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+}
+
+
+meme_title {
+  z-index: 1;
+
+}
+
+.tool_bar {
+  position: fixed;
+  top: 0;
+
+
+list-style: none;
+  margin: 0;
+
+  background: green;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.tool_bar a {
+  text-decoration: none;
+  display: block;
+  padding: 1em;
+  color: white;
+}
+
+.tool_bar a:hover {
+  background: darken(green, 2%);
+}
