@@ -9,7 +9,7 @@ const websocketServer = require('ws').Server;
 const database = require('./database');
 
 var app = express();
-var port = 8080;
+var port = 80;
 
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
 
@@ -69,6 +69,7 @@ app.get('/', function (req, res) {
 	count = 0;
 	var tileCode = "<script>var a=[];</script>";
 	//get sounds from actual files
+	console.log("dirname: "+__dirname);
 	fs.readdirSync('assets/sounds/').forEach(file => {
 		tileCode += writeSound("assets/sounds/"+file, file);
 	});
