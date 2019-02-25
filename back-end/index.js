@@ -69,8 +69,7 @@ app.get('/', function (req, res) {
 	count = 0;
 	var tileCode = "<script>var a=[];</script>";
 	//get sounds from actual files
-	console.log("dirname: "+__dirname);
-	fs.readdirSync('assets/sounds/').forEach(file => {
+	fs.readdirSync(path.join(__dirname, "../assets/sounds")).forEach(file => {
 		tileCode += writeSound("assets/sounds/"+file, file);
 	});
 	tileCode += "<button>play sounds</button>";
