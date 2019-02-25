@@ -9,7 +9,7 @@ const websocketServer = require('ws').Server;
 const database = require('./database');
 
 var app = express();
-var port = process.env.PORT || 80;
+var port = 8080;
 
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
 
@@ -68,7 +68,15 @@ app.get('/', function (req, res) {
 	//query database to get sounds
 	count = 0;
 	var tileCode = "<script>var a=[];</script>";
-	var con = database.getConnection();
+	//get sounds from actual files
+	fs.readdirSync('assets/sounds/').forEach(file => {
+		tileCode += writeSound("assets/sounds/"+file, file);
+	});
+	tileCode += "<button>play sounds</button>";
+	buffer = buffer.replace('*here*', tileCode);
+	res.write(buffer);
+	res.end();
+	/*var con = database.getConnection();
 	con.query("select sF.filePath,sF.fileName from soundFiles sF", function(error, results, fields) {
 		for (let i = 0; i < results.length; i++) {
 			tileCode += writeSound(results[i].filePath, results[i].fileName);
@@ -79,7 +87,7 @@ app.get('/', function (req, res) {
 		res.write(buffer);
 		res.end();
 	});
-	con.end();
+	con.end();*/
 });
 
 app.get('/create', function(req, res) {
@@ -92,12 +100,12 @@ app.get('/create', function(req, res) {
 app.post('/submit-sound', upload.single('sound'), function(req, res) {
 	if (req.file != undefined) {
 		var name = req.body.name;
-		var con = database.getConnection();
+		/*var con = database.getConnection();
 		con.query("insert into soundFiles values("+con.escape(name)+", "+con.escape(req.file.path)+", null, null)", function(error, results, fields) {
 			console.log("error: "+error);
 			console.log("result: "+results);
 		});
-		con.end();
+		con.end();*/
 	}
     res.redirect('/');
 });
